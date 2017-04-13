@@ -13,10 +13,11 @@ namespace Lab_5
             Console.Title = "Grand Circus Casino!";
 
             Random rnd = new Random();
+            bool run = true;
 
             Console.WriteLine("Welcome to the Grand Circus Casino!");
 
-            while (true)
+            while (run)
             {
                 Console.Write("Enter the number of sides for a pair of dice (from 3 to 12): ");
 
@@ -34,6 +35,16 @@ namespace Lab_5
 
                 Console.WriteLine(dye1);
                 Console.WriteLine(dye2);
+                Console.WriteLine();
+
+                if (continueApp())
+                {
+                    continue;
+                }
+                else
+                {
+                    run = false;
+                }
             }
         }
         public static int isValidInteger(string input)
@@ -59,6 +70,32 @@ namespace Lab_5
         {
             int random = rnd.Next(1, ++sides); //Increment sides so that the max value is correct (its max value plus 1)
             return random;
+        }
+        public static bool continueApp()
+        {
+            while (true)
+            {
+                Console.Write("Continue? (y/n): "); //Prompts user if he wants to continue
+
+                string continueString = Console.ReadLine().ToLower();
+
+                if (continueString == "y")
+                {
+                    Console.WriteLine();
+                    return true; //Continues application
+                }
+                else if (continueString == "n")
+                {
+                    return false; //Ends application
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Error: Input not y or n."); //Prompts error if input is not Y or N
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }
